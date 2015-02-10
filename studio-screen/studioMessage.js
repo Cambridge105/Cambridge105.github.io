@@ -1,3 +1,3 @@
 displayMessage({
-	"message": ""
+	"message": "Mic Live light temporarily unavailable"
 });
