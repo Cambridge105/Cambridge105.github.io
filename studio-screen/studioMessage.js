@@ -1,3 +1,3 @@
 displayMessage({
-	"message": "Mic Live light temporarily unavailable"
+	"message": "Mic Live light off. Studio B fader moved."
 });
