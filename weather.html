@@ -19,7 +19,7 @@
     			var day1to2 = response.RegionalFcst.FcstPeriods.Period[0];
     			$.each(day1to2.Paragraph, function(par) {
     				$("#forecast").append($("<p class='headline'>").text(day1to2.Paragraph[par].title));
-    				$("#forecast").append($("<p>").text(day1to2.Paragraph[par].$));
+    				$("#forecast").append($("<p>").text(day1to2.Paragraph[par].$.replace(/(Temperature [\-0-9]+)C/i,  "$1 degrees celcius")));
     			});
     		});
     	});
