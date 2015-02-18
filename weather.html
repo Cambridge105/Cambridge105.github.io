@@ -8,19 +8,38 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript">
     	$(function() {
-    		function getParameterByName(name) {
+    		var getParameterByName = function (name) {
 			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 			    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
 			        results = regex.exec(location.search);
 			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-			}
+			};
+
+            var expandTemperatures = function (str) {
+                // Firstly just positive temps...
+                str = str.replace(/(temperature [0-9]+)C/i,  "$1 Celcius");
+                // Now negative ones...
+                str = str.replace(/(temperature )\-([0-9]+)C/i,  "$1 minus $2 Celcius");
+
+                return str;
+            };
+
+            var printParagraph = function(para) {
+                $("#forecast").append($("<p class='headline'>").text(para.title));
+                $("#forecast").append($("<p>").text(expandTemperatures(para.$)));
+            };
 
     		$.getJSON("http://datapoint.metoffice.gov.uk/public/data/txt/wxfcs/regionalforecast/json/512?key=" + getParameterByName("key")).done(function(response) {
     			var day1to2 = response.RegionalFcst.FcstPeriods.Period[0];
-    			$.each(day1to2.Paragraph, function(par) {
-    				$("#forecast").append($("<p class='headline'>").text(day1to2.Paragraph[par].title));
-    				$("#forecast").append($("<p>").text(day1to2.Paragraph[par].$.replace(/(Temperature [\-0-9]+)C/i,  "$1 degrees celcius")));
-    			});
+
+                var headline = day1to2.Paragraph[0];
+                var firstPara = day1to2.Paragraph[1];
+                var secondPara = day1to2.Paragraph[2];
+
+                printParagraph(headline);
+                $("#forecast").append("<h2>And the weather for Cambridge...</h2>");
+                printParagraph(firstPara);
+                printParagraph(secondPara);
     		});
     	});
     </script>
@@ -35,8 +54,12 @@
     		font-style: italic;
     		font-size: 1.1em;
     	}
+
+        h2 {
+            font-family: sans-serif;
+        }
     </style>
 </head>
 <body>
-<p id="forecast"></p>
+<div id="forecast"></p>
 </body>
