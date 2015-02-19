@@ -36,7 +36,9 @@
                 var firstPara = day1to2.Paragraph[1];
                 var secondPara = day1to2.Paragraph[2];
 
-                printParagraph(headline);
+                if (getParameterByName("showHeadline")) {
+                    printParagraph(headline);
+                }
                 $("#forecast").append("<h2>And the weather for Cambridge...</h2>");
                 printParagraph(firstPara);
                 printParagraph(secondPara);
