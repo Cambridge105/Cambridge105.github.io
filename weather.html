@@ -17,9 +17,9 @@
 
             var expandTemperatures = function (str) {
                 // Firstly just positive temps...
-                str = str.replace(/(temperature [0-9]+)C/i,  "$1 Celcius");
+                str = str.replace(/(temperature [0-9]+)C/i,  "$1 Celsius");
                 // Now negative ones...
-                str = str.replace(/(temperature )\-([0-9]+)C/i,  "$1 minus $2 Celcius");
+                str = str.replace(/(temperature )\-([0-9]+)C/i,  "$1 minus $2 Celsius");
 
                 return str;
             };
