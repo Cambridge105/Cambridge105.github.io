@@ -1,3 +1,3 @@
 displayMessage({
-	"message": "105 SPORT: Remote fader down please!"
+	"message": "Mic Live light off. Studio B fader moved."
 });
