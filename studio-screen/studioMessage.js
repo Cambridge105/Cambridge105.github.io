@@ -1,3 +1,3 @@
 displayMessage({
-	"message": ""
+	"message": "Clock updated for new news intro"
 });
