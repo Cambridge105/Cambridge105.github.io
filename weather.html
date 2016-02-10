@@ -17,9 +17,9 @@
 
             var expandTemperatures = function (str) {
                 // Firstly just positive temps...
-                str = str.replace(/(temperature [0-9]+)C/i,  "$1 degrees Celsius");
+                str = str.replace(/(temperature )([0-9]+)C/i,  "temperature in Cambridge of $2 degrees Celsius");
                 // Now negative ones...
-                str = str.replace(/(temperature )\-([0-9]+)C/i,  "$1 minus $2 degrees Celsius");
+                str = str.replace(/(temperature )\-([0-9]+)C/i,  "temperature in Cambridge of minus $2 degrees Celsius");
 
                 return str;
             };
@@ -39,7 +39,7 @@
                 if (getParameterByName("showHeadline")) {
                     printParagraph(headline);
                 }
-                $("#forecast").append("<h2>And the weather for Cambridge...</h2>");
+                //$("#forecast").append("<h2>And the weather for Cambridge...</h2>");
                 printParagraph(firstPara);
                 printParagraph(secondPara);
     		});
