@@ -44,9 +44,16 @@
                 
                 printParagraph(firstPara);
                 printParagraph(secondPara);
-                
+
                 if (getParameterByName("showExtended")) {
                     printParagraph(extendedWeather);
+
+                    // BUG: this will always show *tomorrow's* forecast temperature, which is correct for the only times we actually care about this paragraph
+                    // (when "tomorrow" is the extended forecast in the morning), but incorrect later in the day when the extended forecast is the 3-5 day outlook.
+                    $.getJSON("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/350730?res=daily&key=" + getParameterByName("key")).done(function(temps) {
+                        var dayMax = temps.SiteRep.DV.Location.Period[1].Rep[0].Dm;
+                        $("#forecast").append($("<p>").text("Maximum temperature " + dayMax + " degrees Celsius."));
+                    });
                 }
     		});
     	});
