@@ -35,13 +35,19 @@
                 var headline = day1to2.Paragraph[0];
                 var firstPara = day1to2.Paragraph[1];
                 var secondPara = day1to2.Paragraph[2];
+                
+                var extendedWeather = response.RegionalFcst.FcstPeriods.Period[1].Paragraph;
 
                 if (getParameterByName("showHeadline")) {
                     printParagraph(headline);
                 }
-                //$("#forecast").append("<h2>And the weather for Cambridge...</h2>");
+                
                 printParagraph(firstPara);
                 printParagraph(secondPara);
+                
+                if (getParameterByName("showExtended")) {
+                    printParagraph(extendedWeather);
+                }
     		});
     	});
     </script>
