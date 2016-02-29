@@ -52,7 +52,7 @@
                     // (when "tomorrow" is the extended forecast in the morning), but incorrect later in the day when the extended forecast is the 3-5 day outlook.
                     $.getJSON("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/350730?res=daily&key=" + getParameterByName("key")).done(function(temps) {
                         var dayMax = temps.SiteRep.DV.Location.Period[1].Rep[0].Dm;
-                        $("#forecast").append($("<p>").text("Maximum temperature " + dayMax + " degrees Celsius."));
+                        $("#forecast").append($("<p>").text("Maximum temperature in Cambridge of " + dayMax + " degrees Celsius."));
                     });
                 }
     		});
