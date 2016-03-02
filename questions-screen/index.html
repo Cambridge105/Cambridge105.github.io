@@ -1,0 +1,209 @@
+<html>
+<head>
+<title>Questions clock</title>
+<script>
+
+function insertNames()
+{
+	names = ["Joe","Mary","John","Susan","David","Laura"];
+	for (i=0; i<names.length; ++i) {
+		document.getElementById("name" + (i+1)).innerHTML=names[i];
+	}
+}
+
+window.onkeyup = function(e) {
+   var key = e.keyCode ? e.keyCode : e.which;
+   if (document.getElementById('speakernames').style.display == 'block') { 
+	// Don't register the key if we're typing in a text box, except to close!
+		if (key == 222) {
+			hideSpeakerNames();
+		}
+   }
+   else if (key == 109 || key == 187) {
+		// Num pad * to start event, or main =
+       toggleFieldEnabled("timerSecs");
+	   setSpeaker(0);
+	   resetTimerToZero("qutimer");
+	   resetTimerToZero("timer1");
+	   resetTimerToZero("timer2");
+	   resetTimerToZero("timer3");
+	   resetTimerToZero("timer4");
+	   resetTimerToZero("timer5");
+	   resetTimerToZero("timer6");
+	   document.getElementById("qutimerSecs").disabled = true;
+   }
+   else if (key == 13) {
+		// To start question, Enter
+       startOverallTimerIfNotStarted();
+	   toggleFieldEnabled("qutimerSecs");
+	   setSpeaker(0);
+	   resetTimerToZero("qutimer");
+	   resetTimerToZero("timer1");
+	   resetTimerToZero("timer2");
+	   resetTimerToZero("timer3");
+	   resetTimerToZero("timer4");
+	   resetTimerToZero("timer5");
+	   resetTimerToZero("timer6");
+	   restartTimer("qutimer");
+   }
+   else if (key > 96 && key < 103) {
+		// Speakers 1-6 (num pad keys)
+       setSpeaker(key - 96);
+   }
+   else if (key > 48 && key < 55) {
+		// Speakers 1-6 (main keys)
+		setSpeaker(key - 48);
+	}
+   else if (key == 96 || key == 48) {
+		// 0 to set question to audience
+		setSpeaker(0);
+	}
+	else if (key==72) {
+		// 'h' for help
+		showHelp();
+		hideSpeakerNames();
+	}
+	else if (key==67 || key==222) {
+		// 'c' or '#' to close modals
+		hideHelp();
+		hideSpeakerNames();
+	}
+	else if (key==78) {
+		// 'n' for names
+		hideHelp();
+		showSpeakerNames();
+	}
+	//else {alert(key);}
+}
+
+function setSpeaker(speakerId) {
+	for (i=1; i<7; ++i) {
+		if (i!=speakerId) {document.getElementById("timer" + i + "Secs").disabled = true; document.getElementById("timer" + i).style.color = 'white'; }
+		else {document.getElementById("timer" + i + "Secs").disabled = false; document.getElementById("timer" + i).style.color = 'yellow'; }
+	}
+}
+
+function startOverallTimerIfNotStarted() {
+	if (document.getElementById("timerSecs").value < 1) {toggleFieldEnabled("timerSecs");}
+}
+
+function toggleFieldEnabled(inputId) {
+	if (document.getElementById(inputId).disabled == false) {document.getElementById(inputId).disabled = true;}
+	   else {document.getElementById(inputId).disabled = false;}
+}
+
+function resetTimerToZero(timer) {
+	document.getElementById(timer).innerHTML = "00:00";
+	document.getElementById(timer + "Secs").value = 0;
+}
+
+function restartTimer(timer) {
+	if (document.getElementById(timer + "Secs").disabled == true) {
+		toggleFieldEnabled(timer + "Secs");
+	}
+}
+
+function updateEnabledTimers() {
+	timerElements = ["timer","qutimer","timer1","timer2","timer3","timer4","timer5","timer6"];
+	for (index=0; index<timerElements.length; ++index)
+	{
+		if (document.getElementById(timerElements[index] + "Secs").disabled == false) {
+			document.getElementById(timerElements[index] + "Secs").value = parseInt(document.getElementById(timerElements[index] + "Secs").value)+1;
+			updateMinutesSecondTimers(timerElements[index],document.getElementById(timerElements[index] + "Secs").value);
+		}
+	}
+}
+
+function updateMinutesSecondTimers(timerId,value) {
+	mins = Math.floor(value/60);
+	secs = value - (mins*60);
+	document.getElementById(timerId).innerHTML = padNumber(mins) + ":" + padNumber(secs);
+}
+
+function padNumber(value) {
+	if (value < 10) {value = "0" + value;}
+	return value;
+}
+
+function showHelp() {
+	document.getElementById('help').style.display = 'block';
+}
+
+function hideHelp() {
+	document.getElementById('help').style.display = 'none';
+}
+
+function showSpeakerNames() {
+	document.getElementById("speaker1name").value = document.getElementById("name1").innerHTML;
+	document.getElementById("speaker2name").value = document.getElementById("name2").innerHTML;
+	document.getElementById("speaker3name").value = document.getElementById("name3").innerHTML;
+	document.getElementById("speaker4name").value = document.getElementById("name4").innerHTML;
+	document.getElementById("speaker5name").value = document.getElementById("name5").innerHTML;
+	document.getElementById("speaker6name").value = document.getElementById("name6").innerHTML;
+	document.getElementById('speakernames').style.display = 'block';
+}
+
+function hideSpeakerNames() {
+	document.getElementById("name1").innerHTML = document.getElementById("speaker1name").value;
+	document.getElementById("name2").innerHTML = document.getElementById("speaker2name").value;
+	document.getElementById("name3").innerHTML = document.getElementById("speaker3name").value;
+	document.getElementById("name4").innerHTML = document.getElementById("speaker4name").value;
+	document.getElementById("name5").innerHTML = document.getElementById("speaker5name").value;
+	document.getElementById("name6").innerHTML = document.getElementById("speaker6name").value;
+	document.getElementById('speakernames').style.display = 'none';
+}
+
+window.setInterval(function(){ updateEnabledTimers(); }, 1000);
+</script>
+<style>
+body {background-color:black; color:white; text-align:center; font-size:36pt; font-family:Arial,sans-serif;}
+div {margin-bottom:30px;}
+.hidden {display:none;}
+span.timer {font-size:70pt;}
+display#speakers{text-align:center;}
+div.speakerDiv {display:inline-block; text-align:center; font-size:28pt; padding-left:12px; padding-right:16px; border-right:1px solid grey;}
+div#speaker1 {border-right:none;}
+div.speakerDiv span {padding:0; margin:0;}
+div.speakerDiv span.timer {font-size:48pt;}
+div#footer {text-align:right; font-family:Arial,sans-serif; font-size:12pt; color:#666}
+div.modal {background-color:#fff; left:100px; top:100px; min-width:500px; position:absolute; z-index:2; border-right:solid grey 3px; border-bottom:solid grey 3px; color:#000; font-size:16pt; text-align:left; padding-left:15px; display:none;}
+</style>
+</head>
+<body onLoad="insertNames()">
+<div id="overall">Whole recording:<br> <span id="timer" class="timer">00:00</span> <input type="text" class="hidden" id="timerSecs" value="0" disabled="true" /></div>
+<div id="question">This question:<br> <span id="qutimer" class="timer">00:00</span> <input type="text" class="hidden" id="qutimerSecs" value="0" disabled="true" /></div>
+
+<div id="speakers">
+<!-- speakers are rendered in reverse so, when Left to Right speaker is identified from the audience, it's in the right order when viewed on the stage -->
+<div id="speaker6" class="speakerDiv"><span id="name6">Name</span> <br> <span id="timer6" class="timer">00:00</span> <input type="text" class="hidden" id="timer6Secs" value="0" disabled="true" /></div>
+<div id="speaker5" class="speakerDiv"><span id="name5">Name</span> <br> <span id="timer5" class="timer">00:00</span> <input type="text" class="hidden" id="timer5Secs" value="0" disabled="true" /></div>
+<div id="speaker4" class="speakerDiv"><span id="name4">Name</span> <br> <span id="timer4" class="timer">00:00</span> <input type="text" class="hidden" id="timer4Secs" value="0" disabled="true" /></div>
+<div id="speaker3" class="speakerDiv"><span id="name3">Name</span> <br> <span id="timer3" class="timer">00:00</span> <input type="text" class="hidden" id="timer3Secs" value="0" disabled="true" /></div>
+<div id="speaker2" class="speakerDiv"><span id="name2">Name</span> <br> <span id="timer2" class="timer">00:00</span> <input type="text" class="hidden" id="timer2Secs" value="0" disabled="true" /></div>
+<div id="speaker1" class="speakerDiv"><span id="name1">Name</span> <br> <span id="timer1" class="timer">00:00</span> <input type="text" class="hidden" id="timer1Secs" value="0" disabled="true" /></div>
+</div>
+
+<hr style="clear:both">
+<div id="footer">For help, press <strong>h</strong></div>
+
+<div id="help" class="modal">
+<p>To <b>set speaker names</b>, press n</p>
+<p>At <b>start of recording</b>, press numpad * (or =)</p>
+<p>At <b>start of question</b>, press Enter. Speaker counters are reset to zero.</p>
+<p>At <b>start of speaker</b>, press speaker ID (1-6). Other speakers already in progress are stopped.</p>
+<p>At <b>start of audience participation</b>, press 0. The question timer continues but other speakers are stopped.</p>
+<p>To close, press <strong>c</strong></p>
+</div>
+
+<div id="speakernames" class="modal">
+<p>Speaker 1: <input type="text" id="speaker1name" value="" /></p>
+<p>Speaker 2: <input type="text" id="speaker2name" value="" /></p>
+<p>Speaker 3: <input type="text" id="speaker3name" value="" /></p>
+<p>Speaker 4: <input type="text" id="speaker4name" value="" /></p>
+<p>Speaker 5: <input type="text" id="speaker5name" value="" /></p>
+<p>Speaker 6: <input type="text" id="speaker6name" value="" /></p>
+<p>To close, press <strong>#</strong></p>
+</div>
+
+</body>
+</html>
