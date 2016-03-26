@@ -45,6 +45,7 @@ window.onkeyup = function(e) {
 	   resetTimerToZero("timer5");
 	   resetTimerToZero("timer6");
 	   restartTimer("qutimer");
+	   incrementQuestionNumber();
    }
    else if (key > 96 && key < 103) {
 		// Speakers 1-6 (num pad keys)
@@ -144,13 +145,20 @@ function showSpeakerNames() {
 }
 
 function hideSpeakerNames() {
-	document.getElementById("name1").innerHTML = document.getElementById("speaker1name").value;
-	document.getElementById("name2").innerHTML = document.getElementById("speaker2name").value;
-	document.getElementById("name3").innerHTML = document.getElementById("speaker3name").value;
-	document.getElementById("name4").innerHTML = document.getElementById("speaker4name").value;
-	document.getElementById("name5").innerHTML = document.getElementById("speaker5name").value;
-	document.getElementById("name6").innerHTML = document.getElementById("speaker6name").value;
+	document.getElementById("name1").innerHTML = document.getElementById("speaker1name").value.replace("#","");
+	document.getElementById("name2").innerHTML = document.getElementById("speaker2name").value.replace("#","");
+	document.getElementById("name3").innerHTML = document.getElementById("speaker3name").value.replace("#","");
+	document.getElementById("name4").innerHTML = document.getElementById("speaker4name").value.replace("#","");
+	document.getElementById("name5").innerHTML = document.getElementById("speaker5name").value.replace("#","");
+	document.getElementById("name6").innerHTML = document.getElementById("speaker6name").value.replace("#","");
+	document.getElementById("totalqus").innerHTML = document.getElementById("questions_total").value.replace("#","");
 	document.getElementById('speakernames').style.display = 'none';
+}
+
+function incrementQuestionNumber() {
+	thisqu = parseInt(document.getElementById("thisqu").innerHTML);
+	thisqu = thisqu + 1;
+	document.getElementById("thisqu").innerHTML = thisqu;
 }
 
 window.setInterval(function(){ updateEnabledTimers(); }, 1000);
@@ -167,11 +175,12 @@ div.speakerDiv span {padding:0; margin:0;}
 div.speakerDiv span.timer {font-size:48pt;}
 div#footer {text-align:right; font-family:Arial,sans-serif; font-size:12pt; color:#666}
 div.modal {background-color:#fff; left:100px; top:100px; min-width:500px; position:absolute; z-index:2; border-right:solid grey 3px; border-bottom:solid grey 3px; color:#000; font-size:16pt; text-align:left; padding-left:15px; display:none;}
+span.qunum {color:lawngreen;}
 </style>
 </head>
 <body onLoad="insertNames()">
-<div id="overall">Whole recording:<br> <span id="timer" class="timer">00:00</span> <input type="text" class="hidden" id="timerSecs" value="0" disabled="true" /></div>
-<div id="question">This question:<br> <span id="qutimer" class="timer">00:00</span> <input type="text" class="hidden" id="qutimerSecs" value="0" disabled="true" /></div>
+<div id="overall">This edition:<br> <span id="timer" class="timer">00:00</span> <input type="text" class="hidden" id="timerSecs" value="0" disabled="true" /></div>
+<div id="question">This question <span class="qunum">(<span id="thisqu">0</span>/<span id="totalqus">0</span>)</span>:<br> <span id="qutimer" class="timer">00:00</span> <input type="text" class="hidden" id="qutimerSecs" value="0" disabled="true" /></div>
 
 <div id="speakers">
 <!-- speakers are rendered in reverse so, when Left to Right speaker is identified from the audience, it's in the right order when viewed on the stage -->
@@ -202,6 +211,7 @@ div.modal {background-color:#fff; left:100px; top:100px; min-width:500px; positi
 <p>Speaker 4: <input type="text" id="speaker4name" value="" /></p>
 <p>Speaker 5: <input type="text" id="speaker5name" value="" /></p>
 <p>Speaker 6: <input type="text" id="speaker6name" value="" /></p>
+<p>Total questions: <input type="text" id="questions_total" value="" /></p>
 <p>To close, press <strong>#</strong></p>
 </div>
 
