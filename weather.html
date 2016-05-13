@@ -56,6 +56,10 @@
                         $("#forecast").append($("<p>").text("Maximum temperature in Cambridge of " + dayMax + " degrees Celsius."));
                     });
                 }
+
+                $('#forecast').click(function() {
+                    $('#forecast').attr("contenteditable", "true");
+                });
     		});
     	});
     </script>
