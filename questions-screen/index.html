@@ -74,6 +74,15 @@ window.onkeyup = function(e) {
 		hideHelp();
 		showSpeakerNames();
 	}
+	else if (key==81) {
+		// 'q' for questions
+		showQuestions();
+	}
+	else if (key==87) {
+		// 'w' to clear questions
+		hideQuestions();
+	}
+	
 	//else {alert(key);}
 }
 
@@ -134,6 +143,14 @@ function hideHelp() {
 	document.getElementById('help').style.display = 'none';
 }
 
+function showQuestions() {
+	document.getElementById('audienceQu').style.display = 'block';
+}
+
+function hideQuestions() {
+	document.getElementById('audienceQu').style.display = 'none';
+}
+
 function showSpeakerNames() {
 	document.getElementById("speaker1name").value = document.getElementById("name1").innerHTML;
 	document.getElementById("speaker2name").value = document.getElementById("name2").innerHTML;
@@ -173,6 +190,7 @@ div.speakerDiv {display:inline-block; text-align:center; font-size:28pt; padding
 div#speaker1 {border-right:none;}
 div.speakerDiv span {padding:0; margin:0;}
 div.speakerDiv span.timer {font-size:48pt;}
+div#audienceQu {background-color:#FF851B; width:100%; display:none; color:black;}
 div#footer {text-align:right; font-family:Arial,sans-serif; font-size:12pt; color:#666}
 div.modal {background-color:#fff; left:100px; top:100px; min-width:500px; position:absolute; z-index:2; border-right:solid grey 3px; border-bottom:solid grey 3px; color:#000; font-size:16pt; text-align:left; padding-left:15px; display:none;}
 span.qunum {color:lawngreen;}
@@ -193,6 +211,7 @@ span.qunum {color:lawngreen;}
 </div>
 
 <hr style="clear:both">
+<div id="audienceQu">Audience question waiting</div>
 <div id="footer">For help, press <strong>h</strong></div>
 
 <div id="help" class="modal">
