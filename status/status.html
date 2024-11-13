@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Cambridge 105 Radio: Station system status</title>
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW, NOARCHIVE" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+main {width:33%; min-width:800px; margin:0 auto; border-left: 1px solid gray; border-right:1px solid gray; padding:10px;}
+article.notice {border:1px solid darkblue; margin:60px auto; padding:5px; }
+h2.currentissues {background-color: darkblue; color:white; margin:1px;}
+ul {list-style: none;}
+li {border-bottom: 1px solid grey; line-height:2em; }
+span {display:inline-block; }
+.component {width:70%;}
+.status {width:27%; text-align: center; font-weight:bold;}
+.ok {background-color: green; color:white; border:1px solid white;}
+.impaired {background-color: orange; color:black; border:1px solid white;}
+.failing {background-color: red; color:white; border:1px solid white;}
+
+        </style>
+    </head>
+    <body>
+        <main>
+        <h1>Cambridge 105 Radio - Station system status</h1>
+        <p>This status page is intended for station staff at Cambridge 105 Radio. For further information on any issues, see #engineering-team in Slack.</p>
+
+        <!--<article class="notice">
+        <h2 class="currentissues">Current Issues</h2>
+        <p>Lorem ipsum</p>
+        </article>-->
+
+        <article>
+        <h2>Transmission</h2>
+        <ul>
+            <li><span class="component">FM</span> <span class="status ok">OK</span></li>
+            <li><span class="component">DAB</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Web stream</span> <span class="status ok">OK</span></li>
+        </ul>
+
+        <h2>Audio sources</h2>
+        <ul>
+            <li><span class="component">Studio A desk</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Studio B desk</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Remote Rivendell</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Remote studios (BUTT)</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Pre-recorded programmes</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Sky News</span> <span class="status ok">OK</span></li>
+        </ul>
+
+        <h2>IT systems</h2>
+        <ul>
+            <li><span class="component">Advert sequencer</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Audio importer</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Email screen</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Fileserver</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Internet at studio</span> <span class="status ok">OK</span></li>
+            <li><span class="component">NetNewsroom / Inrix proxy</span> <span class="status ok">OK</span></li>
+            <li><span class="component">News clip import</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Podcaster</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Pre-recorded programme uploader</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Single sign-on (Keycloak)</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Streamer</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Studio A PC</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Studio B PC</span> <span class="status ok">OK</span></li>
+            <li><span class="component">Rivendell</span> <span class="status ok">OK</span></li>
+            <li><span class="component">ROT - web access</span> <span class="status ok">OK</span></li>
+            <li><span class="component">VPN</span> <span class="status ok">OK</span></li>
+        </ul>
+        </article>
+
+        <article class="notice">
+            <h2 class="currentissues">Recently resolved</h2>
+            <p>12-Nov-24: Intermittent transmission gaps on DAB/FM caused by unstable internet at Wandlebury. (Resolved by ISP) </p>
+            </article>
+
+        </main>
+    </body>
+</html>
