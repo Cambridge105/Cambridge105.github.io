@@ -35,7 +35,7 @@ function loadMessages() {
             request.setRequestHeader("X-API-KEY",replaceme);
         },
         dataType: "json",
-        url: "https://domsmith.co.uk/c105/emailscreen/proxy.php",
+        url: "https://domsmith.co.uk/c105/emailscreen/proxy.php?uid=" + maxUid,
         success: function(json) {
             handleMessages(json);
             now = new Date();
