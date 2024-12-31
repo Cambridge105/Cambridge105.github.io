@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cambridge Radio: Test email screen</title>
+    <link rel="stylesheet" href="emails.css">
+    <script src="jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+
+
+        <header>
+            <div id="title_address"><h1>07919 070490 | studio@cambridge.radio </h1></div>
+            <div id="title_account">Signed out</div>
+        </header>
+        <main>
+            <article class="msg" id="loginPlaceholder">
+                <div class="msg_meta">&nbsp;</div>
+                <div>
+                <p id="status">Please wait. Signing you in...</p>
+                </div>
+            </article>
+        </main>
+
+    <script src="./script/oidc-client.min.js"></script>
+    <script>
+        new Oidc.UserManager().signinRedirectCallback().then(function () {
+            window.location = "index.htm";
+        }).catch(function (e) {
+            $('#status').html("An error occurred while signing you in: <em>" + e + "</em><br><br>Please <a href=\"index.htm\">try again</a>");
+        });
+    </script>
+
+</body>
+
+</html>

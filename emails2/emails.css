@@ -1,0 +1,19 @@
+body {background-color:silver; padding:0; margin:0;}
+header {background-color:darkgreen; color:white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:10px 30px; margin:0;}
+div#title_account {position:relative; top:-70px; text-align: right;padding-right:20px;}
+article {border:1px solid grey; background-color: white; color:black; margin: 35px 15px;  padding: 0; border-left: 6px solid darkgreen; }
+article.new {border-left: 6px solid orange; background-color:rgb(244, 247, 211);}
+article.read {border-left: 6px solid darkgray; color:darkgrey;}
+article.important {border-left: 6px solid red;}
+div.msg_meta {background-color: rgb(238, 238, 238); margin: 0px; font-size: large; font-style: italic; color: black; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; display:grid; grid-auto-rows:1fr; grid-template-columns: 1fr 1fr 1fr;}
+div.msg_meta > div {font-size:x-large; padding: 8px 0;}
+div.msg_meta > div.msg_meta_from {text-align:left; padding-left:25px;}
+div.msg_meta > div.msg_meta_via {text-align:center;}
+div.msg_meta > div.msg_meta_time {text-align:right; padding-right:25px;}
+span.msg_meta_value {font-style: normal; font-weight: bold;}
+details > summary {margin:20px; font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+span.summary_click {font-style:italic; color:gray;}
+details > p {margin:20px; border:1px solid grey; font-size:larger; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:10px; }
+article > div > p {margin:20px; font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+div.msg_actions {background-color: rgb(238, 238, 238); margin: 0px; padding: 10px 3px; font-size: large; font-style: italic; color: black; text-align:right; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;}
+footer {background-color:darkgreen; color:white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:10px 30px; margin:0; text-align: center; font-size: smaller;}

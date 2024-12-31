@@ -1,0 +1,8 @@
+{
+  "realm": "master",
+  "auth-server-url": "https://login.cambridge105.co.uk/",
+  "ssl-required": "external",
+  "resource": "Cambridge105.EmailScreen2",
+  "public-client": true,
+  "confidential-port": 0
+}

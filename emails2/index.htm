@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cambridge Radio: Test email screen</title>
+        <link rel="stylesheet" href="emails.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="emails.js"></script>
+        <script src="./script/oidc-client.min.js"></script>
+        <meta name="robots" content="noindex,nofollow">
+        
+    </head>
+    <body onload="checkUser()">
+        <script>
+        var settings = {
+            // URL of your OpenID Connect server.
+            // The library uses it to access the metadata document
+            authority: 'https://login.cambridge105.co.uk/realms/master',
+        
+            client_id: 'Cambridge105.EmailScreen2',
+        
+            redirect_uri: 'https://cambridge105.github.io/emails2/signin-callback.htm',
+            silent_redirect_uri: 'https://cambridge105.github.io/emails2/silent-renew.htm',
+        
+            // What you expect back from The IdP.
+            // In that case, like for all JS-based applications, an identity token
+            // and an access token
+            response_type: 'id_token token',
+        
+            // Scopes requested during the authorisation request
+            scope: 'openid profile email',
+        
+            // Number of seconds before the token expires to trigger
+            // the `tokenExpiring` event
+            accessTokenExpiringNotificationTime: 4,
+        
+            // Do we want to renew the access token automatically when it's
+            // about to expire?
+            automaticSilentRenew: true,
+        
+            // Do we want to filter OIDC protocal-specific claims from the response?
+            filterProtocolClaims: true
+        };
+        
+        // `UserManager` is the main class exposed by the library
+        var manager = new Oidc.UserManager(settings);
+        var user;
+        
+        // You can hook a logger to the library.
+        // Conveniently, the methods exposed by the logger match
+        // the `console` object
+        Oidc.Log.logger = console;
+        
+        // When a user logs in successfully or a token is renewed, the `userLoaded`
+        // event is fired. the `addUserLoaded` method allows to register a callback to
+        // that event
+        manager.events.addUserLoaded(function (loadedUser) {
+            user = loadedUser;
+        });
+        
+        // Same mechanism for when the automatic renewal of a token fails
+        manager.events.addSilentRenewError(function (error) {
+            console.error('error while renewing the access token', error);
+        });
+        
+        // When the automatic session management feature detects a change in
+        // the user session state, the `userSignedOut` event is fired.
+        manager.events.addUserSignedOut(function () {
+            alert('The user has signed out');
+        });
+        
+
+        
+        // Here we want to redirect the user to the IdP logout page in the main window.
+        // We can also choose to do it in a hidden `iframe`
+        $('.js-logout').on('click', function () {
+            manager
+                .signoutRedirect()
+                .catch(function (error) {
+                    console.error('error while signing out user', error);
+                });
+        });
+
+        function doLogin() {
+            manager
+                .signinRedirect()
+                .catch(function (error) {
+                    console.error('error while logging in through the popup', error);
+                });
+        }
+
+        function checkUser() {
+            user = manager.getUser().then(function (result) {
+                $('#username').html(result.profile.preferred_username);
+                isAuthenticated = true;
+                $('#welcome').hide();
+                $('#pageContent').show();
+                getLatestUidFromCookie();
+                loadMessages();
+                setInterval(loadMessages, 60000);
+            }).catch(function() {
+                isAuthenticated = false;
+                $('#welcome').show();
+                $('pageContent').hide();
+        });
+        }
+        </script>
+        
+        <div id="welcome" style="display:none;">
+            <header>
+                <div id="title_address"><h1>07919 070490 | studio@cambridge.radio </h1></div>
+                <div id="title_account">Signed out</div>
+            </header>
+            <main>
+                <article class="msg" id="loginPlaceholder">
+                    <div class="msg_meta">&nbsp;</div>
+                    <div>
+                    <p>You must be signed in to see this page. </p>
+                    <p>Click <button name="loginBtn" onClick="doLogin()">Login</button> to continue</p>
+                    </div>
+                </article>
+            </main>
+        </div>
+        
+  
+        <div id="pageContent" style="display:none;">
+            <header>
+                <div id="title_address"><h1>07919 070490 | studio@cambridge.radio </h1></div>
+                <div id="title_account">Signed in: <span id="username"></span></div>
+            </header>
+            <main id="contentMain">
+                <article class="msg" id="placeholder">
+                    <div class="msg_meta"><div class="msg_meta_from">From: <span class="msg_meta_value">System</span></div> <div class="msg_meta_via">via: <span class="msg_meta_value">Internal</span></div> <div class="msg_meta_time">Time: <span class="msg_meta_value">Now</span></div></div>
+                    <p>Failed loading messages...</p>
+                </article>
+            </main>
+            <footer>
+                <p>Last update: <span id="last_update">0</span> | Loaded: <span id="loaded_time">0</span> <input type="hidden" id="maxUid" value="0"> | Status: <span id="status">Initial load</span></p>
+            </footer>
+        </div>
+
+    </body>
+</html>
