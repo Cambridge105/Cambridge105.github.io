@@ -30,7 +30,7 @@ function loadMessages() {
     $('#status').html('Loading messages...');
     $.ajax({
         beforeSend: function(request) {
-            request.setRequestHeader("X-API-KEY",'34t34uhifwjgwy34ht4g3489gghf34qt34qy34qp9gh');
+            request.setRequestHeader("X-API-KEY",replaceme);
         },
         dataType: "json",
         url: "https://domsmith.co.uk/c105/emailscreen/proxy.php",
