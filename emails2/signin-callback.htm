@@ -29,7 +29,7 @@
     <script src="./script/oidc-client.min.js"></script>
     <script>
         new Oidc.UserManager().signinRedirectCallback().then(function () {
-            window.location = "index.htm";
+            window.location = "index.htm?key=34t34uhifwjgwy34ht4g3489gghf34qt34qy34qp9gh2f";
         }).catch(function (e) {
             $('#status').html("An error occurred while signing you in: <em>" + e + "</em><br><br>Please <a href=\"index.htm\">try again</a>");
         });
