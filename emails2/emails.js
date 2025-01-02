@@ -33,8 +33,6 @@ function setLatestUidIntoCookie(uid) {
 
 function loadMessages() {
     $('#status').html('Loading messages...');
-    //replaceme = window.location.search.substr(1);
-    //replaceme = replaceme.replace("key=","");
     $.ajax({
         beforeSend: function(request) {
             request.setRequestHeader("X-API-KEY",tempKey);
