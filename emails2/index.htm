@@ -84,7 +84,7 @@
             manager
                 .signinRedirect()
                 .catch(function (error) {
-                    console.error('error while logging in through the popup', error);
+                    console.error('error while logging in', error);
                 });
         }
 
@@ -92,6 +92,7 @@
             user = manager.getUser().then(function (result) {
                 $('#username').html(result.profile.preferred_username);
                 isAuthenticated = true;
+                tempKey = "34t34uhifwjgwy34ht4g3489gghf34qt34qy34qp9gh2f";
                 $('#welcome').hide();
                 $('#pageContent').show();
                 getLatestUidFromCookie();

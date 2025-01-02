@@ -1,7 +1,14 @@
-<script src="oidc-client.min.js"></script>
+<html>
+    <head>
+        <title>Token renew</title>
+    </head>
+    <body> 
+<script src="./script/oidc-client.min.js"></script>
 <script>
     var mgr = new Oidc.UserManager();
     mgr.signinSilentCallback().catch(function (error) {
         console.error(error);
     });
 </script>
+</body>
+</html>

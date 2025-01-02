@@ -1,4 +1,5 @@
 var maxUid = 0;
+var tempKey = "";
 
 function getLatestUidFromCookie() {
     let name = "latestUid=";
@@ -14,25 +15,29 @@ function getLatestUidFromCookie() {
         maxUid = maxUid - 20; //Because on first load we want at least 20 messages
       }
     }
-    maxUid = 183960;
+    if (maxUid == 0) {
+       maxUid = 183960;
+    }
 }
 
 
 function setLatestUidIntoCookie(uid) {
         const d = new Date();
-        d.setTime(d.getTime() + (7 * 24 * 60 * 60 * 1000));
+        d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
         let expires = "expires="+d.toUTCString();
         document.cookie = "latestUid=" + uid + ";" + expires + ";path=/";
 }
 
 
+
+
 function loadMessages() {
     $('#status').html('Loading messages...');
-    replaceme = window.location.search.substr(1);
-    replaceme = replaceme.replace("key=","");
+    //replaceme = window.location.search.substr(1);
+    //replaceme = replaceme.replace("key=","");
     $.ajax({
         beforeSend: function(request) {
-            request.setRequestHeader("X-API-KEY",replaceme);
+            request.setRequestHeader("X-API-KEY",tempKey);
         },
         dataType: "json",
         url: "https://domsmith.co.uk/c105/emailscreen/proxy.php?uid=" + maxUid,
@@ -48,17 +53,6 @@ function loadMessages() {
             $('#status').html('Waiting for next request');
         }
     })
-    //$.getJSON("https://domsmith.co.uk/c105/emailscreen/proxy.php", function (json) {
-    //    handleMessages(json);
-    //    now = new Date();
-    //    now = now.toISOString();
-    //    $('#last_update').html(now);
-    //    if ($('#loaded_time').html() == "0")
-    //    {
-    //        $('#loaded_time').html(now);
-    //    }
-    //    $('#status').html('Waiting for next request');
-    //});
 }
 
 function handleMessages(json) {
@@ -100,7 +94,12 @@ function parseMsg(obj) {
         obj.BodySummary = obj.BodySummary.replace("Email via the Cambridge Radio website – from ", "");
         obj.BodySummary = obj.BodySummary.replace(sender, "");
     }
-    else {method = "Email"; sender = method_str.replaceAll("\"","");}
+    else {
+        method = "Email"; 
+        sender = method_str.replaceAll("\"","");
+        obj.BodySummary = "<b>" + obj.Subject + "</b><br>" + obj.BodySummary;
+        obj.BodyFull = "<b>" + obj.Subject + "</b><br>" + obj.BodyFull;
+    }
     date = handleDateString(obj.DateString);
     classOverride = "";
     if (date == "More than 3 hours ago")
