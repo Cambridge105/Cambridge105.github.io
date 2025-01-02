@@ -17,3 +17,4 @@ details > p {margin:20px; border:1px solid grey; font-size:larger; font-family: 
 article > div > p {margin:20px; font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 div.msg_actions {background-color: rgb(238, 238, 238); margin: 0px; padding: 10px 3px; font-size: large; font-style: italic; color: black; text-align:right; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;}
 footer {background-color:darkgreen; color:white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:10px 30px; margin:0; text-align: center; font-size: smaller;}
+a.logoutlink {color:white;}
