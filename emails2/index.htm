@@ -72,13 +72,13 @@
         
         // Here we want to redirect the user to the IdP logout page in the main window.
         // We can also choose to do it in a hidden `iframe`
-        $('.js-logout').on('click', function () {
+        function doLogout() {
             manager
                 .signoutRedirect()
                 .catch(function (error) {
                     console.error('error while signing out user', error);
                 });
-        });
+        };
 
         function doLogin() {
             manager
@@ -126,7 +126,7 @@
         <div id="pageContent" style="display:none;">
             <header>
                 <div id="title_address"><h1>07919 070490 | studio@cambridge.radio </h1></div>
-                <div id="title_account">Signed in: <span id="username"></span><br><span class="js-logout"><u>Logout</u></span></div>
+                <div id="title_account">Signed in: <span id="username"></span><br><a href="#" onclick="doLogout()">Logout</span></div>
             </header>
             <main id="contentMain">
                 <article class="msg" id="placeholder">
