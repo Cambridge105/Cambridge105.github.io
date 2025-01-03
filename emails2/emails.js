@@ -184,20 +184,20 @@ function updateTimeOnExistingMessage(uid) {
         dateString = $('#' + uid + '-ts').val();
         result = handleDateString(dateString);
         $('#' + uid + '-ds').html(result);
-        console.log("TS [" + dateString + "] DS [" + result + "] for " + uid);
+        isSetToRead =  $('#' + uid).hasClass('read');
         if (result == "More than 3 hours ago") {
             $('#' + uid + "-body").html("<p>You are not authorised to view messages over 3 hours old</p>");
             $('#' + uid + '-rb').prop('disabled', true);
             $('#' + uid).addClass('read');
-            console.log("a");
         }
-        if (result.indexOf(" ago") > 0) {
-            $('#' + uid).removeClass('new');
-            console.log("b");
+        else if ((result.indexOf(" ago") > 0) && (!isSetToRead)) {
+            $('#' + uid).addClass('new');
+        }
+        else if ((result == "Now") && (!isSetToRead)) {
+            $('#' + uid).addClass('new');
         }
         else {
-            $('#' + uid).addClass('new');
-            console.log("c");
+            $('#' + uid).removeClass('new');
         }
     }
 }
