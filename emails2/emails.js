@@ -192,6 +192,9 @@ function updateTimeOnExistingMessage(uid) {
         if (result.indexOf(" ago") < 0) {
             $('#' + uid).removeClass('new');
         }
+        else {
+            $('#' + uid).addClass('new');
+        }
     }
 }
 
