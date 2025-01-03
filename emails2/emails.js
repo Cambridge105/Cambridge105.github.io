@@ -108,10 +108,8 @@ function parseMsg(obj) {
     }
     else if ((date.indexOf(" ago") > 1) || (date=="Now"))
     {
-        console.log("here " + obj.Uid);
         classOverride = "new";
     }
-    console.log("Date [" + date + "] and classOverride [" + classOverride + "] for " + obj.Uid);
     html = "<article class=\"msg " + classOverride + "\" id=\"" + obj.Uid + "\"><div class=\"msg_meta\"><div class=\"msg_meta_from\">From: <span class=\"msg_meta_value\">"  + sender + "</span></div> <div class=\"msg_meta_via\">via: <span class=\"msg_meta_value\">" + method + "</span></div> <div class=\"msg_meta_time\">Time: <span class=\"msg_meta_value\" id=\"" + obj.Uid + "-ds\">" + date + "</span></div><input type=\"hidden\" id=\"" + obj.Uid + "-ts\" value=\"" + obj.DateString + "\"></div>";
     html += "<div id=\"" + obj.Uid + "-body\">" + formatMsgBody(obj.BodySummary, obj.BodyFull) + "</div>";
     html += "<div class=\"msg_actions\"><button onClick=\"markRead(" + obj.Uid + ")\" id=\"" + obj.Uid + "-rb\">Read</button> </div></article>"
@@ -186,6 +184,7 @@ function updateTimeOnExistingMessage(uid) {
         dateString = $('#' + uid + '-ts').val();
         result = handleDateString(dateString);
         $('#' + uid + '-ds').html(result);
+        console.log("TS [" + dateString + "] DS [" + result + "] for " + uid);
         if (result == "More than 3 hours ago") {
             $('#' + uid + "-body").html("<p>You are not authorised to view messages over 3 hours old</p>");
             $('#' + uid + '-rb').prop('disabled', true);
