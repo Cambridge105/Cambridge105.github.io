@@ -189,12 +189,15 @@ function updateTimeOnExistingMessage(uid) {
             $('#' + uid + "-body").html("<p>You are not authorised to view messages over 3 hours old</p>");
             $('#' + uid + '-rb').prop('disabled', true);
             $('#' + uid).addClass('read');
+            console.log("a");
         }
         if (result.indexOf(" ago") < 0) {
             $('#' + uid).removeClass('new');
+            console.log("b");
         }
         else {
             $('#' + uid).addClass('new');
+            console.log("c");
         }
     }
 }
