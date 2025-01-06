@@ -11,7 +11,7 @@ div.msg_meta > div.msg_meta_from {text-align:left; padding-left:25px;}
 div.msg_meta > div.msg_meta_via {text-align:center;}
 div.msg_meta > div.msg_meta_time {text-align:right; padding-right:25px;}
 span.msg_meta_value {font-style: normal; font-weight: bold;}
-details > summary {margin:20px; font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+details > summary {margin:20px; font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; cursor:pointer;}
 span.summary_click {font-style:italic; color:gray;}
 details > p {margin:20px; border:1px solid grey; font-size:larger; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:10px; }
 article > div > p {margin:20px; font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
