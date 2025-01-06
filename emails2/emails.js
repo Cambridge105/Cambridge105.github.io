@@ -159,10 +159,10 @@ function formatMsgBody(summary, full) {
     if (msgSum.length < 1) {
         return "<p>(Blank message received from server)</p>";
     }
-    else if (msgSum.length < 240) {
+    else if (msgSum.length < 314) { // SMS message = 160 chars, or 153 if concatenated, so this is two messages (153+160=313)
         return "<p>" + msgSum + "</p>";
     }
-    return "<details><summary>" + msgSum.substring(0,239) + "... <span class=\"summary_click\">(Click to expand)</span></summary><p>" + msgFull + "</p></details>";
+    return "<details><summary>" + msgSum.substring(0,313) + "... <span class=\"summary_click\">(Click to expand)</span></summary><p>" + msgFull + "</p></details>";
 }
 
 /*
