@@ -146,7 +146,11 @@ function handleDateString(dateStr) {
     else if (ts_diff < 120000) {return "1 min ago";}
     else if (ts_diff < 600000) {return Math.floor((ts_diff/1000)/60) + " mins ago"}
     else if (ts_diff > 10800000) {return "More than 3 hours ago"}
-    else {return dateStr;}
+    else {
+        msgDate = new Date(dateStr);
+        msgTime = msgDate.getHours() + ":" + msgDate.getMinutes();
+        return msgTime;
+    }
 
 }
 
