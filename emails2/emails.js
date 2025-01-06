@@ -64,7 +64,6 @@ function handleMessages(json) {
         html += parseMsg (json[i]);
     }
     $("#contentMain").html(html + content);
-    $("details p").replaceAnchorLinks();
     if ($("#maxUid").val() != maxUid)
     {
         setLatestUidIntoCookie(maxUid);
