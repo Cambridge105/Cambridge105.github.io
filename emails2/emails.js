@@ -64,6 +64,7 @@ function handleMessages(json) {
         html += parseMsg (json[i]);
     }
     $("#contentMain").html(html + content);
+    $("details p").replaceAnchorLinks();
     if ($("#maxUid").val() != maxUid)
     {
         setLatestUidIntoCookie(maxUid);
@@ -162,7 +163,7 @@ function formatMsgBody(summary, full) {
     else if (msgSum.length < 240) {
         return "<p>" + msgSum + "</p>";
     }
-    return "<details><summary>" + msgSum.substring(0,239) + "... <span class=\"summary_click\">(Click to expand)</span></summary><p>" + msgFull.replaceAnchorLinks(); + "</p></details>";
+    return "<details><summary>" + msgSum.substring(0,239) + "... <span class=\"summary_click\">(Click to expand)</span></summary><p>" + msgFull + "</p></details>";
 }
 
 /*
