@@ -85,6 +85,10 @@ function parseMsg(obj) {
     else if (obj.From.indexOf("SMS") > 0) {
         method = "Text Message";
         sender = obj.Subject.substring(obj.Subject.indexOf("from ")+5, obj.Subject.indexOf(" - "));
+        if (sender == "SMS from ")
+        {
+            sender = "Unknown - ends " + obj.Subject.substring(obj.Subject.length - 4)
+        }
     }
     else if (obj.From.indexOf("admin@cambridge105.co.uk") > 1) {
         method="Email via Website"; 
