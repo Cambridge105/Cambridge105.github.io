@@ -87,7 +87,7 @@ function parseMsg(obj) {
         sender = obj.Subject.substring(obj.Subject.indexOf("from ")+5, obj.Subject.indexOf(" - "));
         if (sender == "SMS from ")
         {
-            sender = "Unknown - ends " + obj.Subject.substring(obj.Subject.length - 4);
+            sender = "Unknown - number ends " + obj.Subject.substring(obj.Subject.length - 4);
         }
     }
     else if (obj.From.indexOf("admin@cambridge105.co.uk") > 1) {
