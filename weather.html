@@ -30,6 +30,10 @@
                 $("#forecast").append($("<p>").text(expandTemperatures(para.$)));
             };
 
+            var printParagraph2 = function(para) {
+                $("#forecast2").append($("<p>").text(para));
+            }
+
     		$.getJSON("http://datapoint.metoffice.gov.uk/public/data/txt/wxfcs/regionalforecast/json/512?key=" + getParameterByName("key")).done(function(response) {
     			var day1to2 = response.RegionalFcst.FcstPeriods.Period[0];
 
@@ -62,6 +66,11 @@
                     $('#forecast').attr("contenteditable", "true");
                 });
     		});
+
+            $.getJSON("https://c105-weather-script.s3.eu-west-1.amazonaws.com/weather.json").done(function(response) {
+                printParagraph2(response.forecast);
+            });
+
     	});
     </script>
     <meta name="viewport" content="width=device-width" />
@@ -83,4 +92,7 @@
 </head>
 <body>
 <div id="forecast"></div>
+<hr style="margin-top: 30px;">
+<p><em>The Met Office service that provides the script above will be discontinued on 1st December. Below is our own summary, currently being tested. Please send feedback to #engineering-team in Slack. </em></p>
+<div id="forecast2"></div>
 </body>
