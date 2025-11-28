@@ -31,7 +31,7 @@
             };
 
             var printParagraph2 = function(para) {
-                $("#forecast2").append($("<p>").text(para));
+                $("#forecast2").html("<p>" + para + "</p>");
             }
 
     		$.getJSON("http://datapoint.metoffice.gov.uk/public/data/txt/wxfcs/regionalforecast/json/512?key=" + getParameterByName("key")).done(function(response) {
